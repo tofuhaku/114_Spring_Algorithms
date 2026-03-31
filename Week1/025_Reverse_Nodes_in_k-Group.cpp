@@ -28,8 +28,10 @@ public:
         /* Calculate the length */
         int len = getLength(head);
         
-        ListNode* dummy = new ListNode(0, head);
-        ListNode* p0 = dummy;
+        // ListNode* dummy = new ListNode(0, head);
+        // ListNode* p0 = dummy;
+        ListNode dummy(0, head);
+        ListNode* p0 = &dummy;
         
         ListNode* pre = nullptr;
         ListNode* cur = p0->next;
@@ -49,7 +51,10 @@ public:
             p0 = tail;
         }
         
-        return dummy->next;
+        // ListNode* res = dummy->next;
+        // delete dummy;
+        // return res;
+        return dummy.next;
     }
 };
 

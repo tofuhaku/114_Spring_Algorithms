@@ -25,7 +25,7 @@ public:
         nxt[n + 1] = -1;    // tail has no right neighbor
         
         // min-heap by pair_sum
-        using T = tuple<long long, int, int>;
+        using T = tuple<long long, int, int>;           // <pair_sum, left_index, right_index>
         priority_queue<T, vector<T>, greater<T>> heap;
 
         // Push all adjacent pairs into the heap
@@ -52,7 +52,9 @@ public:
                 continue;
             }
             
-            if (psum != val[L] + val[R]) continue;
+            if (psum != val[L] + val[R]) {
+                continue;
+            }
             
             // Remove the contribution of the old pairs to inversions before merging
             // Consider three old pairs: (prv[L], L), (L, R), (R, nxt[R])
