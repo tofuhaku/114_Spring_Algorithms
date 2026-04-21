@@ -3,21 +3,17 @@ CXXFLAGS = -std=c++17 -O2 -Wall
 BUILD_DIR = build
 
 define find_cpp
-$(shell find . -type f -name "$(1)_*.cpp" | head -n 1)
+$(shell find . -type d \( -name .git -o -name $(BUILD_DIR) \) -prune -o -type f -name "$(1)_*.cpp" -print | head -n 1)
 endef
 
 define find_py
-$(shell find . -type f -name "$(1)_*.py" | head -n 1)
+$(shell find . -type d \( -name .git -o -name $(BUILD_DIR) \) -prune -o -type f -name "$(1)_*.py" -print | head -n 1)
 endef
 
-
 # Make a new solution file with a template
-# Default settings
-path ?= .
-ext ?= cpp
 
 define template_cpp
-#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n\n	return 0;\n}
+#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    Solution sol;\n\n	return 0;\n}
 endef
 
 define template_py
@@ -29,17 +25,21 @@ define template_rs
 
 endef
 
-define template_md
-$(shell date +%Y/%m/%d)\n\n### Notes\n- \n}
-endef
+# define template_md
+# $(shell date +%Y/%m/%d)\n\n### Notes\n- \n
+# endef
 
-# TODO: Refactor to be less complicated and more robust (e.g. handle edge cases, support more languages, etc.)
+# Default settings
+dir ?= .
+ext ?= cpp
+
+# TODO: Refactor to be less complicated and more robust (e.g. support more languages, etc.)
 new:
 	@if [ -z "$(name)" ] || [ -z "$(title)" ]; then \
-		echo "Usage: make new name=1385 title=Problem_Name path=Binary_Search [ext=cpp|py|md]"; \
+		echo "Usage: make new name=1385 title=Problem_Name dir=Binary_Search [ext=cpp|py|md]"; \
 		exit 1; \
 	fi; \
-	target_dir="$(path)"; \
+	target_dir="$(dir)"; \
 	mkdir -p "$$target_dir"; \
 	base_name="$(name)_$(title)"; \
 	if [ "$(ext)" = "md" ]; then \
@@ -62,7 +62,7 @@ new:
 	fi; \
 	echo ">>> Created: $$file_path" \
 	# zed "$$file_path"
-
+	
 
 # Compile and run the solution file
 run:
