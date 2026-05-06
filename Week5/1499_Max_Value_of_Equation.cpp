@@ -26,8 +26,6 @@ public:
             }
             
             // TODO 3: Maintain the strictly decreasing monotonic property of the deque
-            // If the current (y - x) is greater than or equal to the back of the deque,
-            // the back elements are useless because the current element is larger and will live longer.
             int currentDiff = y - x;
             while (!dq.empty() && dq.back().first <= currentDiff) {
                 dq.pop_back();

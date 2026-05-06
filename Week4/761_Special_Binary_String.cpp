@@ -16,19 +16,12 @@ public:
         
         // TODO 1: Find all top-level special substrings
         for (int i = 0; i < s.length(); i++) {
-            if (s[i] == '1') {
-                count++;
-            } else {
-                count--;
-            }
+            count += (s[i] == '1') ? 1 : -1;
             
             if (count == 0) {
-                // Extract substring [start, i]
-                string sub = s.substr(start, i - start + 1);
-                
                 // TODO 2: Recursively process the inner part
-                // Remove outer '1' and '0', process middle, then wrap back
-                string inner = sub.substr(1, sub.length() - 2);
+                // Extract substring [start, i] and remove outer '1' and '0', process middle, then wrap back
+                string inner = s.substr(start + 1, i - start - 1);
                 string processed = "1" + makeLargestSpecial(inner) + "0";
                 
                 subs.push_back(processed);

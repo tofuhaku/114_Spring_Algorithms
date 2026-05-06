@@ -27,6 +27,7 @@ public:
         multiset<int> heights;
         heights.insert(0);      // ground height
         int prevMaxHeight = 0;
+        
 
         // TODO 4: sweep line
         for (const auto& event : events) {
@@ -41,10 +42,10 @@ public:
                 heights.erase(heights.find(h));
             }
 
-            // max height
+            // max height (multiset is ascending order)
             int currentMaxHeight = *heights.rbegin();
 
-            // only record when height changes
+            // record when height changes
             if (currentMaxHeight != prevMaxHeight) {
                 result.push_back({x, currentMaxHeight});
                 prevMaxHeight = currentMaxHeight;
