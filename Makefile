@@ -13,7 +13,7 @@ endef
 # Make a new solution file with a template
 
 define template_cpp
-#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    Solution sol;\n\n	return 0;\n}
+#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <numeric>\n#include <queue>\n#include <unordered_map>\nusing namespace std;\n\nint main() {\n    Solution sol;\n\n	return 0;\n}
 endef
 
 define template_py
