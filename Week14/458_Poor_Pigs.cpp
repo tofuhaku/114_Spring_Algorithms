@@ -26,6 +26,6 @@ public:
 
 int main() {
     Solution sol;
-
+    cout << sol.poorPigs(1000, 15, 60) << endl; // Example test case
 	return 0;
 }
